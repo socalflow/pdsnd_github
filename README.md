@@ -16,4 +16,4 @@ It filters the Data by City, Month and day and uses imput prompted by the user t
 - bikeshare.py
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.value_counts.html
