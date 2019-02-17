@@ -61,7 +61,7 @@ def get_filters():
     Returns:
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    
+
     days = ('all','monday','tuesday','wednesday','thursday','friday','saturday','sunday')
     day = input('Please select a day (monday, tuesday, ... sunday). Type "all" for no filter:').lower()
     while day not in days:
@@ -208,14 +208,15 @@ def user_stats(df):
 
 
 
-    answer = input('Would you like to see 5 rows of raw data? type \'yes\' or \'no\': ')
+    answer = input('Would you like to see 5 rows of raw data? type \'y\' or \'n\': ')
     x = 0
-    while answer == 'yes':
+    while answer == 'y':
         x += 5
         print(df[0+x:5+x])
-        answer = input('Would you like to see 5 more rows of raw data? type \'yes\' or \'no\': ')
+        answer = input('Would you like to see 5 more rows of raw data? type \'y\' or \'n\': ')
 
-
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)
 
 def main():
     while True:
@@ -228,8 +229,8 @@ def main():
         user_stats(df)
 
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
+        restart = input('\nWould you like to restart? Enter \'y\' or \'n\'.\n')
+        if restart.lower() != 'y':
             break
 
 
