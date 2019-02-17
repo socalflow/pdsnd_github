@@ -191,15 +191,15 @@ def user_stats(df):
 
 
 
-    answer = input('Would you like to see 5 rows of raw data? type \'yes\' or \'no\': ')
+    answer = input('Would you like to see 5 rows of raw data? type \'y\' or \'n\': ')
     x = 0
-    while answer == 'yes':
+    while answer == 'y':
         x += 5
         print(df[0+x:5+x])
-        answer = input('Would you like to see 5 more rows of raw data? type \'yes\' or \'no\': ')
+        answer = input('Would you like to see 5 more rows of raw data? type \'y\' or \'n\': ')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)            
+    print('-'*40)
 
 def main():
     while True:
