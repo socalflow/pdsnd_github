@@ -20,7 +20,7 @@ def get_filters():
 
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    
+
     cities = ('washington', 'chicago', 'new york city')
     city = input('Would you like to see data on chicago, washington or new york city? Please select one: ').lower()
     while city not in cities:
@@ -40,9 +40,9 @@ def get_filters():
     if month != 'all':
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
-         
-              
-        
+
+
+
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     days = ('all','monday','tuesday','wednesday','thursday','friday','saturday','sunday')
@@ -51,9 +51,9 @@ def get_filters():
         print('Ooops, that is not a valid day. Please try again!')
         day = input('Please chose a day between monday and sunday: ')
         break
- 
 
-   
+
+
     return city, month, day
     print('-'*40)
 
@@ -74,14 +74,14 @@ def load_data(city, month, day):
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
     df['Day of Week'] = df['Start Time'].dt.weekday_name
-    
+
     if month != 'all':
         df = df[df['month'] == month]
-        
-    
+
+
     if day != 'all':
         df = df[df['Day of Week'] == day.title()]
-        
+
     return df
 
 
@@ -92,7 +92,7 @@ def time_stats(df):
     start_time = time.time()
 
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     popular_month = df['month'].mode()[0]
     print('The most common month is: {}.'.format(popular_month))
 
@@ -126,7 +126,7 @@ def station_stats(df):
 
     # TO DO: display most frequent combination of start station and endstation
     """Found helpful information on this website: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.value_counts.html"""
-    
+
     popular_trip = df.groupby(['Start Station','End Station']).size().sort_values(ascending=False)
 
     print('This is the most frequent combination of start and end station:\n', popular_trip.head(1))
@@ -162,7 +162,7 @@ def user_stats(df):
     user_types = df['User Type'].value_counts().count()
     print('There are {} different kinds of Users.'.format(user_types))
     print(df['User Type'].value_counts())
-          
+
     # TO DO: Display counts of gender
     if 'Gender' in df.columns:
         gender_count = df['Gender'].value_counts(dropna=True)
@@ -171,45 +171,46 @@ def user_stats(df):
     else:
         print('There is no information regarding gender or birth year for washington.')
 
-   
+
 
     # TO DO: Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
         most_recent = df['Birth Year'].max()
         print('The youngest user was born in {}.'.format(most_recent))
-        
+
         earliest = df['Birth Year'].min()
-        
-        print('The oldest user was born in {}.'.format(earliest))   
-        
+
+        print('The oldest user was born in {}.'.format(earliest))
+
         most_common = df['Birth Year'].mode()[0]
-        print('The most common birth year is {}.'.format(most_common)) 
+        print('The most common birth year is {}.'.format(most_common))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
 
- 
+
     answer = input('Would you like to see 5 rows of raw data? type \'yes\' or \'no\': ')
     x = 0
     while answer == 'yes':
         x += 5
         print(df[0+x:5+x])
         answer = input('Would you like to see 5 more rows of raw data? type \'yes\' or \'no\': ')
-                
-            
-    
+
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)            
+
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        
+
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
+
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
